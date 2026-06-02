@@ -1,26 +1,25 @@
-const header = document.getElementById("header");
-const scrollTop = document.querySelector(".scroll-top");
+document.addEventListener("DOMContentLoaded", function () {
+  const header = document.getElementById("header");
+  const scrollTop = document.querySelector(".scroll-top");
+  const form = document.querySelector(".contact-form");
 
-window.addEventListener("scroll", function () {
-  if (window.scrollY > 50) {
-    header.classList.add("scrolled");
-  } else {
-    header.classList.remove("scrolled");
+  function updateScrollState() {
+    if (header) {
+      header.classList.toggle("scrolled", window.scrollY > 50);
+    }
+
+    if (scrollTop) {
+      scrollTop.classList.toggle("show", window.scrollY > 400);
+    }
   }
 
-  if (window.scrollY > 400) {
-    scrollTop.style.opacity = "1";
-    scrollTop.style.pointerEvents = "auto";
-  } else {
-    scrollTop.style.opacity = "0";
-    scrollTop.style.pointerEvents = "none";
+  window.addEventListener("scroll", updateScrollState);
+  updateScrollState();
+
+  if (form) {
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      alert("Gửi thông tin thành công!");
+    });
   }
-});
-
-/* ===== CONTACT FORM ===== */
-
-const form = document.querySelector(".contact-form");
-form.addEventListener("submit", function (event) {
-  event.preventDefault();
-  alert("Gửi thông tin thành công!");
 });
